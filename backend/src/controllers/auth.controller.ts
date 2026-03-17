@@ -10,18 +10,12 @@ export const registerController = asyncHandler(
     const body = registerSchema.parse(req.body);
 
     const user = await registerService(body);
-    const userId = user._id as string;
 
-    return setJwtAuthCookie({
-      res,
-      userId,
-    })
-      .status(HTTPSTATUS.CREATED)
-      .json({
-        message: "Đăng ký và đăng nhập thành công",
-        user,
-      });
-  }
+    return res.status(HTTPSTATUS.CREATED).json({
+      message: "Đăng ký thành công.",
+      user,
+    });
+  },
 );
 
 export const loginController = asyncHandler(
@@ -39,7 +33,7 @@ export const loginController = asyncHandler(
         message: "Đăng nhập thành công",
         user,
       });
-  }
+  },
 );
 
 export const logoutController = asyncHandler(
@@ -47,7 +41,7 @@ export const logoutController = asyncHandler(
     return clearJwtAuthCookie(res).status(HTTPSTATUS.OK).json({
       message: "Đăng xuất thành công",
     });
-  }
+  },
 );
 
 export const authStatusController = asyncHandler(
@@ -57,5 +51,5 @@ export const authStatusController = asyncHandler(
       message: "Người dùng đã xác thực",
       user,
     });
-  }
+  },
 );

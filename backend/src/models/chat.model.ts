@@ -1,4 +1,3 @@
-
 import mongoose, { Document, Schema } from "mongoose";
 
 export interface ChatDocument extends Document {
@@ -40,7 +39,7 @@ const chatSchema = new Schema<ChatDocument>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const ChatModel = mongoose.model<ChatDocument>("Chat", chatSchema);

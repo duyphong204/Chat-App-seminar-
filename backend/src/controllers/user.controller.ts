@@ -5,12 +5,13 @@ import { getUsersService } from "../services/user.service";
 import { HTTPSTATUS } from "../config/http.config";
 
 export const getUsersController = asyncHandler(
-    async (req: Request, res: Response) => {
-        const userId = req.user?._id
-        const users = await getUsersService(userId)
-        return res.status(HTTPSTATUS.OK).json({
-            message: "Lấy danh sách người dùng thành công",
-            users
-        })
-    }
-)
+  async (req: Request, res: Response) => {
+    const userId = req.user?._id;
+    console.log(req.user?._id);
+    const users = await getUsersService(userId);
+    return res.status(HTTPSTATUS.OK).json({
+      message: "Lấy danh sách người dùng thành công",
+      users,
+    });
+  },
+);

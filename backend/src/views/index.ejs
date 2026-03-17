@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= typeof title !== 'undefined' ? title : 'Chat App' %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="welcome">
+            <h1>Chào mừng đến Chat App</h1>
+            <p>Ứng dụng chat real-time hiện đại</p>
+            
+            <% if (typeof user !== 'undefined' && user) { %>
+                <div class="user-info">
+                    <h2>Xin chào, <%= user.name %></h2>
+                    <p>Email: <%= user.email %></p>
+                    <div class="action-buttons">
+                        <a href="/chat" class="btn btn-primary">💬 Vào Chat</a>
+                        <form action="/api/auth/logout" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-logout">Đăng xuất</button>
+                        </form>
+                    </div>
+                </div>
+            <% } else { %>
+                <div class="auth-buttons">
+                    <a href="/login" class="btn btn-primary">Đăng nhập</a>
+                    <a href="/register" class="btn btn-secondary">Đăng ký</a>
+                </div>
+            <% } %>
+        </div>
+    </div>
+    <script src="/js/main.js"></script>
+</body>
+</html>

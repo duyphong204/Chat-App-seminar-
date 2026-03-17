@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat - Chat App</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/chat.css" />
+  </head>
+  <body>
+    <div class="chat-container">
+      <!-- Header -->
+      <div class="chat-header">
+        <div class="header-content">
+          <h1>Chat App</h1>
+          <div class="header-right">
+            <div class="online-status">
+              <span class="status-dot"></span>
+              <span class="status-text">Online</span>
+            </div>
+            <form
+              action="/api/auth/logout"
+              method="POST"
+              style="display: inline"
+            >
+              <button type="submit" class="btn-logout-header">Đăng xuất</button>
+            </form>
+          </div>
+        </div>
+        <div class="header-tabs">
+          <button class="tab-btn active" data-tab="chats">Tin nhắn</button>
+          <button class="tab-btn" data-tab="users">Mọi người</button>
+        </div>
+      </div>
+
+      <div class="chat-main">
+        <!-- Sidebar - Danh sách Chat -->
+        <div class="chat-sidebar">
+          <!-- Tab Chats -->
+          <div id="chats-tab" class="tab-content active">
+            <div class="sidebar-header">
+              <h3>Cuộc trò chuyện</h3>
+              <button class="btn-create-group" id="createGroupBtn">✚</button>
+            </div>
+            <input
+              type="text"
+              id="searchChat"
+              class="search-input"
+              placeholder="Tìm cuộc trò chuyện..."
+            />
+            <div class="chats-list" id="chatsList">
+              <div class="loading">Đang tải...</div>
+            </div>
+          </div>
+
+          <!-- Tab Users -->
+          <div id="users-tab" class="tab-content">
+            <div class="sidebar-header">
+              <h3>Mọi người</h3>
+            </div>
+            <input
+              type="text"
+              id="searchUser"
+              class="search-input"
+              placeholder="Tìm người dùng..."
+            />
+            <div class="users-list" id="usersList">
+              <div class="loading">Đang tải...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Window -->
+        <div class="chat-window">
+          <div class="chat-empty">
+            <p>👋 Chọn cuộc trò chuyện để bắt đầu</p>
+          </div>
+
+          <div class="chat-content" id="chatContent" style="display: none">
+            <!-- Chat Header -->
+            <div class="chat-window-header">
+              <div class="chat-info">
+                <h2 id="chatName">Chat</h2>
+                <span id="chatStatus" class="chat-status">Offline</span>
+              </div>
+              <button class="btn-info">ℹ️</button>
+            </div>
+
+            <!-- Messages -->
+            <div class="messages-area" id="messagesArea">
+              <div class="loading">Đang tải tin nhắn...</div>
+            </div>
+
+            <!-- Message Input -->
+            <div class="message-input-area">
+              <form id="messageForm" class="message-form">
+                <input
+                  type="text"
+                  id="messageInput"
+                  class="message-input"
+                  placeholder="Nhập tin nhắn..."
+                  required
+                />
+                <button type="submit" class="btn-send">Gửi</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Create Group -->
+    <div id="createGroupModal" class="modal" style="display: none">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Tạo nhóm chat</h2>
+          <button type="button" class="modal-close">&times;</button>
+        </div>
+        <form id="createGroupForm" class="modal-body">
+          <div class="form-group">
+            <label for="groupName">Tên nhóm</label>
+            <input type="text" id="groupName" name="groupName" required />
+          </div>
+          <div class="form-group">
+            <label>Thành viên</label>
+            <div id="userCheckboxList" class="checkbox-list">
+              <!-- Sẽ được populate bằng JS -->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-cancel">Hủy</button>
+            <button type="submit" class="btn-submit">Tạo nhóm</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="/js/chat.js"></script>
+  </body>
+</html>

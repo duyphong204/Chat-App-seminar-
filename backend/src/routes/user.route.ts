@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { passportAuthenticateJwt } from "../config/passport.config";
 import { getUsersController } from "../controllers/user.controller";
+import { passportAuthenticateJwtOptional } from "../middlewares/passportOptionalAuth.middleware";
 
 const userRoutes = Router()
   .use(passportAuthenticateJwt)
